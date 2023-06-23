@@ -12,3 +12,8 @@ _Копировать конфиг_
 ```shell
 cp ./vifmrc ~/.vifm
 ```
+
+Чтобы отображался `!`, когда vifm запущен для zsh необходимо добавить в `.zshrc.` такую строку:
+```
+RPROMPT=$(/home/krv/Documents/bin/check_vifm.sh)
+```
