@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+ps | grep -o vifm > /dev/null
+CHECK=$?
+
+close_terminal() {
+    kill -1 `ps | grep zsh | tail -n 1 | awk '{print $1}'`
+}
+
+if [[ $CHECK == "1" ]]; then 
+    /usr/bin/vifm
+else
+    close_terminal
+fi
