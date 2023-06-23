@@ -116,11 +116,14 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 mark h ~/
 mark b ~/Documents/bin/
+mark s ~/Documents/other/ssh/
 mark p /home/krv/Documents/projects/
 mark n /home/krv/Documents/clouds/yandex/notes/
-mark N /home/krv/Documents/projects/nlmk/
+mark E /home/krv/Documents/projects/eurochem/
+mark B /home/krv/Documents/projects/banki/
 mark P /home/krv/Documents/projects/eurochem/privoma/
 mark R /home/krv/Documents/projects/eurochem/rnes/
+mark X /home/krv/Documents/projects/eurochem/exui/
 " ==============================================================================
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -136,21 +139,23 @@ bmark! /home/krv/Documents/projects/eurochem/rnes/ projects rteh rnes
 bmark! /home/krv/Documents/projects/eurochem/rnes/services/ projects rteh rnes
 bmark! /home/krv/Documents/projects/eurochem/rnes/k8s/config_repo/ projects rteh rnes
 
-bmark! /home/krv/Documents/projects/nlmk/ projects nlmk
-bmark! /home/krv/Documents/projects/nlmk/git/ projects nlmk nlmk-git
-bmark! /home/krv/Documents/projects/nlmk/end/ projects nlmk end
-bmark! /home/krv/Documents/projects/nlmk/end/git/ projects nlmk end nlmk-git
-bmark! /home/krv/Documents/projects/nlmk/spep/ projects spep nlmk-git
-
-bmark! /home/krv/Documents/projects/python/ projects python
+bmark! /home/krv/Documents/projects/eurochem/exui/ projects rteh exui
+bmark! /home/krv/Documents/projects/eurochem/exui/services/ projects rteh exui
+bmark! /home/krv/Documents/projects/eurochem/exui/k8s/config_repo/ projects rteh exui
 
 bmark! /home/krv/Documents/projects/banki/ projects banki
+
+bmark! /home/krv/Documents/projects/python/ projects python
+bmark! /home/krv/Documents/projects/k8s/ projects k8s
+
+bmark! /home/krv/Documents/other/ssh/ ssh
+
 
 
 " temp dirs
 bmark! ~/tmp/ tmp
 bmark! ~/Documents/tmp/ tmp
-bmark! /tmp tmp
+bmark! /tmp/ tmp
 
 " clouds
 bmark!  ~/Documents/clouds/yandex/ yandex ya cloud
@@ -213,7 +218,7 @@ command! reload :write | restart full
 " program.
 
 " Pdf
-filextype {*.pdf},<application/pdf> zathura %c %i &, apvlv %c, xpdf %c
+filextype {*.pdf},<application/pdf> zathura %c %i &, apvlv %c, xpdf %c, evince %f &
 fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
 
 " PostScript
@@ -258,14 +263,16 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
          \ ffprobe -pretty %c 2>&1
 
 " Web
-filextype {*.html,*.htm},<text/html>
-        \ {Open with dwb}
-        \ dwb %f %i &,
-        \ {Open with firefox}
-        \ firefox %f &,
-        \ {Open with uzbl}
-        \ uzbl-browser %f %i &,
-filetype {*.html,*.htm},<text/html> links, lynx
+"filextype {*.html,*.htm},<text/html>
+"        \ {Open with dwb}
+"        \ dwb %f %i &,
+"        \ {Open with firefox}
+"        \ firefox %f &,
+"        \ {Open with uzbl}
+"        \ uzbl-browser %f %i &,
+"filetype {*.html,*.htm},<text/html> links, lynx
+
+fileviewer {*.html,*.htm} google-chrome-stable %f &
 
 " Object
 filetype {*.o},<application/x-object> nm %f | less
@@ -527,6 +534,9 @@ nnoremap <a-i> :sync<cr>
 nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
+
+" show sizes
+"nnoremap <Space>z !for d in %f ; do du -s $d; done | awk '{sum += $1} END {printf sum/1024 "M"}' %S<CR>
 
 " ------------------------------------------------------------------------------
 
