@@ -8,7 +8,7 @@ close_terminal() {
 }
 
 if [[ $CHECK == "1" ]]; then 
-    /usr/bin/vifm
+    /usr/bin/vifm $@
 else
     close_terminal
 fi
